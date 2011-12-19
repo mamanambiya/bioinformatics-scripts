@@ -1,14 +1,16 @@
 #!/usr/bin/env perl
 
-# A script to retrieve the current_mysql data for the latest ensembl release
-# and push it to a local MySQL database
+# A script to retrieve the current_mysql data for the latest ensembl release and push it to a local MySQL database
 # Coded by Steve Moss
 # gawbul@gmail.com
 # 7th February 2011
 
 # ToDo
 #
-#
+
+###########################################################################
+# * YOU NEED AT LEAST 2TB OF FREE SPACE FOR A SINGLE RELEASE OF ENSEMBL * #
+###########################################################################
 
 # make life easier
 use warnings;
@@ -21,6 +23,7 @@ use DBI;
 use DBD::mysql;
 use File::Spec;
 use IO::Uncompress::Gunzip qw(gunzip $GunzipError);
+use Time::HiRes qw(gettimeofday);
 
 ##############################################
 # Variables here - change values as required #
@@ -43,6 +46,8 @@ chop($sql_password);
 
 # other variables
 my $data_dir = "/Volumes/DATA/current_mysql"; ####### CHANGE THIS TO THE DIRECTORY YOU WANT TO STORE YOUR FILES IN #######
+
+my $start_time = gettimeofday;
 
 ########################
 # FTP stuff below here #
@@ -67,7 +72,7 @@ foreach my $dir (@dirs) {
 	# this limits the downloaded data to the core databases
 	# there is nothing stopping you removing this regex and downloading all the MySQL databases from EnsEMBL
 	# obviously this depends on both the amount of time and space you have available
-	if ($dir =~ /[a-z]+_[a-z]+_core_[0-9]{2}_[0-9[a-z]{0,}/ || $dir =~ /ensembl_ancestral|compara|ontology_[0-9]{2}/) {
+	#if ($dir =~ /[a-z]+_[a-z]+_core_[0-9]{2}_[0-9[a-z]{0,}/ || $dir =~ /ensembl_[a-z]+_[0-9]{2}/) { ####### CHANGE THIS REGEX IF YOU ONLY WANT SPECIFIC DATABASE #######
 		# chdir to $dir
 		my $newdir = $ftpdir . "/" . $dir;
 		$ftp->cwd($newdir) or die "Can't go to $newdir: $!";
@@ -82,10 +87,9 @@ foreach my $dir (@dirs) {
 		
 		# return to FTP root
 		$ftp->cwd() or die "Can't go to FTP root: $!";
-		
-		print "Done!\n\n"
-		}	
+	#}	
 }
+print "Done!\n\n";
 
 #-- close ftp connection
 $ftp->quit or die "Error closing ftp connection: $!";
@@ -107,7 +111,9 @@ foreach my $dir (@dirs) {
 	unless (-d $path) {
 		mkdir $path;
 	}
-	
+
+	print "Retrieving files for $dir...\n";	
+
 	my $files_ref = $ftp_files{$dir};
 	my @files = @$files_ref;
 
@@ -121,6 +127,7 @@ foreach my $dir (@dirs) {
 		}
 	}
 }			
+print "Done!\n\n";
 
 ##########################
 # Extract the data files #
@@ -165,7 +172,7 @@ foreach my $dir (@dirs) {
 					unlink $output;
 					
 					# get file again
-					system("wget -t 0 -c -N ftp://$host/$ftpdir/$dir/$input");
+					system("wget -t 2 -c -N ftp://$host/$ftpdir/$dir/$input");
 					
 					# update status
 					$status = 1;
@@ -174,8 +181,8 @@ foreach my $dir (@dirs) {
 			unlink $input;
 		}
 	}
-	print "Done!\n";
 }
+print "Done!\n\n";
 chdir getcwd();
 
 ##########################
@@ -205,42 +212,38 @@ foreach my $dir (@dirs) {
 	my $dbh = DBI->connect($dsn, $sql_username, $sql_password) or die "Unable to connect: $DBI::errstr\n";
 	$dbh->do("DROP DATABASE IF EXISTS $dir");
 	$dbh->do("CREATE DATABASE IF NOT EXISTS $dir");
-	#system("mysqladmin -h $sql_host -P $sql_port -u $sql_username --password=$sql_password create $dir"); # deprecated - error IF EXISTS
 	$dbh->disconnect();
 	
 	# populate database with tables from .sql file
 	print "Building database structure for $dir...\n";
 	my $sql_file = File::Spec->catfile($data_dir, $dir, $dir . ".sql");
 	system("mysql -h $sql_host -P $sql_port -u $sql_username --password=$sql_password $dir \< $sql_file");
-	
+			
 	# get list of files
 	opendir(my $dh, "$data_dir/$dir") or die "Can't opendir $data_dir/$dir: $!";
 	my @files = grep {!/^\./ && -f "$data_dir/$dir/$_" } readdir($dh);
 	closedir $dh;
 	@files = sort {$a cmp $b} @files;
 	
-	# setup database connection
-	$dsn = "DBI:mysql:$dir:$sql_host:$sql_port";
-	$dbh = DBI->connect($dsn, $sql_username, $sql_password) or die "Unable to connect: $DBI::errstr\n";
-
 	# populate tables in turn
 	foreach my $file (@files) {
-		unless ($file eq "CHECKSUMS" || $file =~ /.*?\.sql$/) {
+		if ($file =~ /.*?\.txt$/) {
 			# get variables
 			my $sql_file = File::Spec->catfile($data_dir, $dir, $file);
 			my $table = substr($file, 0, -4);
 			
 			# build query and execute
-			print "Loading data in $sql_file into $table...\n";
-			$dbh->do("LOAD DATA INFILE \'$sql_file\' INTO TABLE $table");
+			print "Loading data in $sql_file into $dir...\n";
+			system("mysqlimport -h $sql_host -P $sql_port -u $sql_username --password=$sql_password $dir $sql_file");
+			#unlink $sql_file;
 		}
 	}
 	
-	# disconnect from database
-	$dbh->disconnect();
-	
-	print "Done!\n";
 }
+print "Done!\n\n";
 chdir getcwd();
 
-print "Finished!\n";
+my $end_time = gettimeofday;
+my $total_time = $end_time - $start_time;
+
+print "Finished in $total_time seconds!\n";
