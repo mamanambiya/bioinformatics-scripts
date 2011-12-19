@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>accessDate</key>
+		<date>2011-10-25T10:04:47Z</date>
+		<key>actualSize</key>
+		<integer>932</integer>
+		<key>attributeModDate</key>
+		<date>2011-10-20T08:39:39Z</date>
+		<key>createDate</key>
+		<date>2011-05-04T08:44:55Z</date>
+		<key>creationDate</key>
+		<date>2011-11-03T16:06:53Z</date>
+		<key>encrypted</key>
+		<false/>
+		<key>id</key>
+		<string>39811C48-8387-4D01-B492-AA9B75D9ACF0</string>
+		<key>lastModifiedDate</key>
+		<date>2011-10-20T08:39:39Z</date>
+		<key>originalPath</key>
+		<string>/Users/stevemoss/Dropbox/PhD/Research/Scripts/taxa_count.py</string>
+		<key>originalSize</key>
+		<integer>932</integer>
+		<key>versionMetadataList</key>
+		<array>
+			<dict>
+				<key>POSIXPermissions</key>
+				<integer>-32275</integer>
+				<key>creatorCode</key>
+				<integer>559047528</integer>
+				<key>fileType</key>
+				<integer>1413830740</integer>
+				<key>id</key>
+				<string>A597ABA4-A693-4B52-8B89-E5EC67B579CF</string>
+				<key>macAttributes</key>
+				<integer>0</integer>
+				<key>ownerGID</key>
+				<integer>20</integer>
+				<key>ownerUID</key>
+				<integer>501</integer>
+			</dict>
+		</array>
+		<key>versionType</key>
+		<integer>1</integer>
+	</dict>
+</array>
+</plist>

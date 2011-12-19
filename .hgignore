@@ -1,0 +1,10 @@
+# files matching glob syntax
+syntax: glob
+
+*.plist
+.Memeo*
+.DS_Store
+.git*
+
+# files matching regex syntax
+syntax: regexp

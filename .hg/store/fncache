@@ -1,0 +1,39 @@
+data/fix_seq_names.py.i
+data/phdchat_aggregator.py.i
+data/.Memeo short_fasta_desc.py.plist.i
+data/.Memeo unique_fasta_desc_num.py.plist.i
+data/create_redundancy.pl.i
+data/.DS_Store.i
+data/remove_mysql.sh.i
+data/fasta_desc_to_acc.py.i
+data/create_redundancy.c.i
+data/get_fasta_qual_subset.py.i
+data/get_taxonomy_from_ncbi.pl.i
+data/.Memeo reduce_multifasta.py.plist.i
+data/unique_fasta_desc_num.py.i
+data/fix_duplicates.py.i
+data/fastq2qual.py.i
+data/prepend_barcodes_primers.py.i
+data/taxa_count.py.i
+data/.Memeo README.plist.i
+data/mega_to_fasta.py.i
+data/short_fasta_desc.py.i
+data/stap_stripper.py.i
+data/convert_to_relaxed_phylip.py.i
+data/fastq2fasta.py.i
+data/.Memeo create_redundancy.pl.plist.i
+data/.hgignore.i
+data/fix_tree.py.i
+data/get_ensembl.pl.i
+data/FRconsensus.py.i
+data/kill_papers.cron.i
+data/.Memeo get_ensembl.pl.plist.i
+data/.Memeo FRconsensus.py.plist.i
+data/kill_papers.py.i
+data/README.i
+data/reduce_multifasta.py.i
+data/get_ensembl.py.i
+data/.Memeo create_redundancy.c.plist.i
+data/.Memeo create_redundancy.py.plist.i
+data/create_redundancy.py.i
+data/run_STAP.py.i

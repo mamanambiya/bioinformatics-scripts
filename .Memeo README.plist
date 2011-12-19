@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>accessDate</key>
+		<date>2011-10-25T10:04:32Z</date>
+		<key>actualSize</key>
+		<integer>124</integer>
+		<key>attributeModDate</key>
+		<date>2011-10-20T08:39:38Z</date>
+		<key>createDate</key>
+		<date>2011-02-28T11:46:00Z</date>
+		<key>creationDate</key>
+		<date>2011-11-03T16:03:09Z</date>
+		<key>encrypted</key>
+		<false/>
+		<key>id</key>
+		<string>FD072F9A-5AE5-4CDA-8466-84AAAA48BC0D</string>
+		<key>lastModifiedDate</key>
+		<date>2011-10-20T08:39:38Z</date>
+		<key>originalPath</key>
+		<string>/Users/stevemoss/Dropbox/PhD/Research/Scripts/README</string>
+		<key>originalSize</key>
+		<integer>124</integer>
+		<key>versionMetadataList</key>
+		<array>
+			<dict>
+				<key>POSIXPermissions</key>
+				<integer>-32348</integer>
+				<key>creatorCode</key>
+				<integer>0</integer>
+				<key>fileType</key>
+				<integer>0</integer>
+				<key>id</key>
+				<string>16BE3BC8-E14E-4258-B8E5-756A743B5390</string>
+				<key>macAttributes</key>
+				<integer>0</integer>
+				<key>ownerGID</key>
+				<integer>20</integer>
+				<key>ownerUID</key>
+				<integer>501</integer>
+			</dict>
+		</array>
+		<key>versionType</key>
+		<integer>1</integer>
+	</dict>
+</array>
+</plist>
