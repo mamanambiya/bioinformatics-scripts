@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 """
-	Build matrix - creates a matrix of a given number of dimensions and a given
-	number of rows and columns in length
+	Build matrix - creates a 2d matrix of a given
+	number of rows and columns in length and outputs
+	to a file. Useful for working with DupliPHY.
 """
 
 # module imports
@@ -29,6 +30,7 @@ matrix.append(list(row_values))
 
 # do the groovy stuff
 count = 0
+print "Creating matrix..."
 while count < row_length - 1:
 	# adjust row values
 	first = count + 1
@@ -45,3 +47,4 @@ matrixfile = open("matrix.txt", "w")
 for row in matrix:
 	matrixfile.write(' '.join([str(r) for r in row]) + "\n")
 matrixfile.close()
+print "Outputted to matrix.txt"
