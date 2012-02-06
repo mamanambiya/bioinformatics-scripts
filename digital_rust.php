@@ -79,7 +79,7 @@ function digital_rust_init() {
 					array(	'ID' => $post_id),
 					array(
 							'%s',
-							'%d'
+							'%s'
 					), 
 					array('%d') 
 	);
