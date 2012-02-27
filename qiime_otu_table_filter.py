@@ -33,14 +33,14 @@ input_file = open(filename, "r")
 output_file = open(output_filename, "w")
 # read in first two lines
 for i in range(2):
-	header_lines.append(input_file.readline().strip("\n"))
+	header_lines.append(input_file.readline().rstrip("\n"))
 # write headers to output file
 for header in header_lines:
 	output_file.write(header + "\n")
 # iterate over lines
 total_count = 0
 for line in input_file.readlines():
-	line.strip("\n") # remove trailing whitespace
+	line = line.rstrip("\n") # remove trailing whitespace
 	parts = line.split("\t")
 	# check we have 12 parts
 	if len(parts) != 12:
