@@ -53,7 +53,7 @@ dirs = ensembl_ftp.nlst()
 for dir in dirs:
 	# match only core + ensembl ancestral, compara and ontology dbs if need be
 	# remove if and adjust whitespace to retrieve everything
-	if re.match("[a-z]+_[a-z]+_core_[0-9]{2}_\w+", dir) or re.match("(^ensembl_[aco][a-z]{6,8}_[0-9]{2}$)", dir):
+	if re.match("[a-z]+_[a-z]+_core_[0-9]{2}_\w+", dir) or re.match("(^ensembl_[agco][a-z]{2,8}_[0-9]{2}$)", dir):
 	# if re.match("^[a-z]+_[a-z]+_[a-z]+_[0-9]{2}_\w+$", dir) or re.match("(^ensembl_[aco][a-z]{6,8}_[0-9]{2}$)", dir):
 		print dir
 		new_path = os.path.join(ftp_path, dir) # build new path
