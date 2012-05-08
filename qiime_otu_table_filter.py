@@ -4,7 +4,7 @@ A Python script to filter out certain organisms from a QIIME generated otu_table
 """
 
 # imports
-import os, sys, re
+import os, sys
 
 # setup variables
 filter_orgs = ["p__Fungi", "p__Stramenopiles", "p__Viridiplantae"]
